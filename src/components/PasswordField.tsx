@@ -1,0 +1,71 @@
+import React, { useState } from "react";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import { Control, Controller } from "react-hook-form";
+import { FormHelperText, Typography } from "@mui/material";
+
+interface PasswordFieldProps {
+  form: {
+    control: Control<any>;
+    formState: {
+      errors: any;
+    };
+  };
+  name: string;
+  label?: string;
+  disabled?: boolean;
+}
+
+export default function PasswordField(props: PasswordFieldProps) {
+  const { form, name, label, disabled } = props;
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword((x) => !x);
+  };
+
+  const error = form.formState.errors[name]?.message;
+  //   const hasError = !!errors[name];
+
+  return (
+    <FormControl fullWidth margin="normal" variant="outlined">
+      <InputLabel htmlFor={name}>{label}</InputLabel>
+      <Controller
+        name={name}
+        control={form.control}
+        rules={{ required: "Please enter your password" }}
+        render={({ field }) => (
+          <OutlinedInput
+            {...field}
+            id={name}
+            type={showPassword ? "text" : "password"}
+            label={label}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={toggleShowPassword}
+                  edge="end">
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            disabled={disabled}
+            error={!!error}
+          />
+        )}
+      />
+      {error && (
+        <FormHelperText>
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
+}
