@@ -1,20 +1,24 @@
 "use client";
 
-import React from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import { Box, CssBaseline } from "@mui/material";
+import React, { useState, useContext } from "react";
+import { ThemeProvider } from "@/contexts/ThemeProvider";
 
-export default function DashboardPage() {
-  const { user } = useAuth();
-
-  if (!user) {
-    return <div>Please log in to access the dashboard.</div>;
-  }
+export default function Dashboard() {
+  const [open, setOpen] = useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
   return (
-    <div>
-      <h2>Welcome to the Dashboard!</h2>
-      <p>Hello, {user.email}!</p>
-      <p>This is the protected dashboard page after login.</p>
-    </div>
+    <ThemeProvider>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <Header open={open} toggleDrawer={toggleDrawer} />
+        <Sidebar open={open} toggleDrawer={toggleDrawer} />
+      </Box>
+    </ThemeProvider>
   );
 }

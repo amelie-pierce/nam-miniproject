@@ -1,4 +1,3 @@
-"use client";
 import { AuthProvider } from "@/contexts/AuthContext";
 import type { Metadata } from "next";
 
