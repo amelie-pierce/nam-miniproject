@@ -29,9 +29,7 @@ export default function PasswordField(props: PasswordFieldProps) {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   const toggleShowPassword = () => {
     setShowPassword((x) => !x);

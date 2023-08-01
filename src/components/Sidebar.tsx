@@ -7,6 +7,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import { mainListItems } from "./listItems";
+import { Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuth } from "@/contexts/AuthContextProvider";
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -43,8 +47,17 @@ function Sidebar({
   open: boolean;
   toggleDrawer: () => void;
 }) {
+  const { logout } = useAuth();
+
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
+
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant="permanent" open={open} sx={{ height: "100vh" }}>
       <Toolbar
         sx={{
           display: "flex",
@@ -58,6 +71,14 @@ function Sidebar({
       </Toolbar>
       <Divider />
       <List component="nav">{mainListItems}</List>
+      <Box sx={{ marginTop: "auto" }}>
+        <ListItemButton onClick={handleLogout}>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItemButton>
+      </Box>
     </Drawer>
   );
 }

@@ -5,6 +5,8 @@ import ListItemText from "@mui/material/ListItemText";
 import PeopleIcon from "@mui/icons-material/People";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Divider } from "@mui/material";
 
 export const mainListItems = (
   <React.Fragment>

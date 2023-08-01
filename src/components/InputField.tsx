@@ -22,9 +22,7 @@ export default function InputField(props: InputFieldProps) {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   const validateInput = (value: string) => {
     if (!value) {

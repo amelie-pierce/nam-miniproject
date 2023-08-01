@@ -4,17 +4,17 @@ import { createContext, useState, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "@/utils/theme";
 
-interface ThemeContextType {
+interface ThemeContextProps {
   theme: string;
   changeTheme: (value: string) => void;
 }
 
-const defaultThemeValue: ThemeContextType = {
+const defaultThemeValue: ThemeContextProps = {
   theme: "dark",
   changeTheme: (value: string) => {},
 };
 
-export const ThemeContext = createContext<ThemeContextType>(defaultThemeValue);
+export const ThemeContext = createContext<ThemeContextProps>(defaultThemeValue);
 
 export default function ThemeContextProvider({
   children,
@@ -23,10 +23,8 @@ export default function ThemeContextProvider({
 }) {
   const [theme, setTheme] = useState<string>(defaultThemeValue.theme);
 
-  // Run this effect only on the client-side to access localStorage
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    console.log("store theme:", storedTheme);
     setTheme(storedTheme || defaultThemeValue.theme);
   }, []);
 

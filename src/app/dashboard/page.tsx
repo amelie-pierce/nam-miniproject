@@ -7,6 +7,7 @@ import React, { useState } from "react";
 
 export default function Dashboard() {
   const [open, setOpen] = useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
