@@ -21,6 +21,7 @@ export default function ThemeButton() {
       <Button
         variant="contained"
         color="primary"
+        sx={{ width: "100px", height: "40px" }}
         startIcon={
           themeContextValue.theme === "light" ? (
             <DarkModeIcon />
