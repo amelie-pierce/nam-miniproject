@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FormHelperText, TextField, Typography } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
 
@@ -16,6 +16,15 @@ interface InputFieldProps {
 
 export default function InputField(props: InputFieldProps) {
   const { form, name, label, disabled } = props;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   const validateInput = (value: string) => {
     if (!value) {
@@ -48,7 +57,6 @@ export default function InputField(props: InputFieldProps) {
             label={label}
             disabled={disabled}
             error={!!error}
-            // helperText={error ? error : ""}
           />
         )}
       />

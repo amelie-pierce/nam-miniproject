@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -23,13 +23,21 @@ interface PasswordFieldProps {
 export default function PasswordField(props: PasswordFieldProps) {
   const { form, name, label, disabled } = props;
   const [showPassword, setShowPassword] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   const toggleShowPassword = () => {
     setShowPassword((x) => !x);
   };
 
   const error = form.formState.errors[name]?.message;
-  //   const hasError = !!errors[name];
 
   return (
     <FormControl fullWidth margin="normal" variant="outlined">

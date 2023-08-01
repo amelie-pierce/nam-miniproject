@@ -5,9 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import { useThemeContext } from "@/contexts/ThemeProvider";
+
+import ThemeButton from "./theme-button";
 
 const drawerWidth = 240;
 
@@ -39,8 +38,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
-  const { mode, toggleColorMode } = useThemeContext();
-
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar sx={{ pr: "24px" }}>
@@ -63,9 +60,7 @@ const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
           sx={{ flexGrow: 1 }}>
           Dashboard
         </Typography>
-        <IconButton color="inherit" onClick={toggleColorMode}>
-          {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-        </IconButton>
+        <ThemeButton />
       </Toolbar>
     </AppBar>
   );
