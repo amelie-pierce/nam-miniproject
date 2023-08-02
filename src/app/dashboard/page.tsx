@@ -1,26 +1,23 @@
 "use client";
 
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import { Box, CssBaseline } from "@mui/material";
-import React, { useState } from "react";
+import { Box } from "@mui/material";
+import React from "react";
+import { useAuth } from "@/contexts/AuthContextProvider";
 
-export default function Dashboard({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState(true);
-
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+export default function Dashboard() {
+  const { user } = useAuth();
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <Header open={open} toggleDrawer={toggleDrawer} />
-      <Sidebar open={open} toggleDrawer={toggleDrawer} />
-      {children}
-      ---------------------------------------------------------------------------------
-      This is the Dashboard Page
-      ---------------------------------------------------------------------------------
-    </Box>
+    <div>
+      {user ? (
+        <Box sx={{ p: 3 }}>
+          <h1>Dashboard</h1>
+        </Box>
+      ) : (
+        <Box sx={{ p: 3 }}>
+          <h1>Not logged in</h1>
+        </Box>
+      )}
+    </div>
   );
 }

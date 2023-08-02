@@ -9,13 +9,19 @@ import Link from "next/link";
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <Link href="/dashboard/first">
+    <Link
+      href="/dashboard"
+      style={{ color: "inherit", textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+    </Link>
+    <Link
+      href="/dashboard/first"
+      style={{ color: "inherit", textDecoration: "none" }}>
       <ListItemButton>
         <ListItemIcon>
           <PersonIcon />
@@ -23,7 +29,9 @@ export const mainListItems = (
         <ListItemText primary="Page 1" />
       </ListItemButton>
     </Link>
-    <Link href="/dashboard/second">
+    <Link
+      href="/dashboard/second"
+      style={{ color: "inherit", textDecoration: "none" }}>
       <ListItemButton>
         <ListItemIcon>
           <PeopleIcon />
