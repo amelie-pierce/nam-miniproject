@@ -11,6 +11,7 @@ import { Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "@/contexts/AuthContextProvider";
 import { useRouter } from "next/navigation";
+import { useSidebarContext } from "@/contexts/SidebarContextProvider";
 
 const drawerWidth = 240;
 
@@ -40,24 +41,22 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-function Sidebar({
-  open,
-  toggleDrawer,
-}: {
-  open: boolean;
-  toggleDrawer: () => void;
-}) {
+export default function Sidebar() {
   const { logout } = useAuth();
-
   const router = useRouter();
+  const { sidebarOpen, toggleSidebar } = useSidebarContext();
 
   const handleLogout = () => {
     logout();
     router.push("/");
   };
 
+  const handleToggleSidebar = () => {
+    toggleSidebar();
+  };
+
   return (
-    <Drawer variant="permanent" open={open} sx={{ height: "100vh" }}>
+    <Drawer variant="permanent" open={sidebarOpen} sx={{ height: "100vh" }}>
       <Toolbar
         sx={{
           display: "flex",
@@ -65,7 +64,7 @@ function Sidebar({
           justifyContent: "flex-end",
           px: [1],
         }}>
-        <IconButton onClick={toggleDrawer}>
+        <IconButton onClick={handleToggleSidebar}>
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
@@ -82,5 +81,3 @@ function Sidebar({
     </Drawer>
   );
 }
-
-export default Sidebar;

@@ -10,6 +10,7 @@ import Link from "next/link";
 export const mainListItems = (
   <React.Fragment>
     <Link
+      prefetch
       href="/dashboard"
       style={{ color: "inherit", textDecoration: "none" }}>
       <ListItemButton>

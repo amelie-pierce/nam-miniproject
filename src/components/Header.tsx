@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useSidebarContext } from "@/contexts/SidebarContextProvider";
 
 import ThemeButton from "./theme-button";
 
@@ -32,23 +33,24 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-interface HeaderProps {
-  open: boolean;
-  toggleDrawer: () => void;
-}
+export default function Header() {
+  const { sidebarOpen, toggleSidebar } = useSidebarContext();
 
-const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
+  const handleToggleSidebar = () => {
+    toggleSidebar();
+  };
+
   return (
-    <AppBar position="absolute" open={open}>
+    <AppBar position="absolute" open={sidebarOpen}>
       <Toolbar sx={{ pr: "24px" }}>
         <IconButton
           edge="start"
           color="inherit"
           aria-label="open drawer"
-          onClick={toggleDrawer}
+          onClick={handleToggleSidebar}
           sx={{
             marginRight: "36px",
-            ...(open && { display: "none" }),
+            ...(sidebarOpen && { display: "none" }),
           }}>
           <MenuIcon />
         </IconButton>
@@ -64,6 +66,4 @@ const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
       </Toolbar>
     </AppBar>
   );
-};
-
-export default Header;
+}
