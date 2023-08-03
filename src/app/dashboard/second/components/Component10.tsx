@@ -18,7 +18,7 @@ export default function Component10() {
       &emsp; &emsp;
       <TextField
         id="outlined-basic"
-        label="Outlined"
+        label="Input Field 2"
         variant="outlined"
         value={inputValue}
         onChange={handleChange}

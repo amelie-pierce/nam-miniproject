@@ -1,14 +1,13 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Component1 from "./components/Component1";
 import Component7 from "./components/Component7";
 import Component10 from "./components/Component10";
-import { useInputContext } from "@/contexts/InputContextProvider";
 
 export default function Second() {
-  const { inputValue } = useInputContext();
+  const [displayText, setDisplayText] = useState("");
 
   return (
     <Box sx={{ p: 3 }}>
@@ -16,11 +15,11 @@ export default function Second() {
       <hr />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Typography variant="body1" component="span">
-          Hello me!!! Change the State here: {inputValue}
+          Hello me!!! Change the State here: {displayText}
         </Typography>
         <Component1 />
         <br />
-        <Component7 />
+        <Component7 setDisplayText={setDisplayText} />
         <br />
         <Component10 />
       </Box>

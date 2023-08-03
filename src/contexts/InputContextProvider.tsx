@@ -1,10 +1,10 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 
 interface InputContextProps {
   inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  setInputValue: (value: string) => void;
 }
 
 const InputContext = createContext<InputContextProps | null>(null);
@@ -25,9 +25,21 @@ export const InputContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef<string>("");
+
+  const setInputValueRef = (value: string) => {
+    inputRef.current = value;
+    setInputValue(value);
+  };
+
+  console.log("inputValue", inputValue);
 
   return (
-    <InputContext.Provider value={{ inputValue, setInputValue }}>
+    <InputContext.Provider
+      value={{
+        inputValue,
+        setInputValue: setInputValueRef,
+      }}>
       {children}
     </InputContext.Provider>
   );
