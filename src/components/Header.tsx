@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import ThemeButton from "./theme-button";
+import { useAppContext } from "@/contexts/AppContextProvider";
 
 const drawerWidth = 240;
 
@@ -32,12 +33,8 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-interface HeaderProps {
-  open: boolean;
-  toggleDrawer: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
+const Header = () => {
+  const { open, toggleDrawer } = useAppContext();
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar sx={{ pr: "24px" }}>
@@ -49,7 +46,8 @@ const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
           sx={{
             marginRight: "36px",
             ...(open && { display: "none" }),
-          }}>
+          }}
+        >
           <MenuIcon />
         </IconButton>
         <Typography
@@ -57,7 +55,8 @@ const Header: React.FC<HeaderProps> = ({ open, toggleDrawer }) => {
           variant="h6"
           color="inherit"
           noWrap
-          sx={{ flexGrow: 1 }}>
+          sx={{ flexGrow: 1 }}
+        >
           Dashboard
         </Typography>
         <ThemeButton />

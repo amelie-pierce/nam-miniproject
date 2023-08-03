@@ -3,6 +3,13 @@
 import { createContext, useState, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "@/utils/theme";
+import CssBaseline from "@mui/material/CssBaseline";
+import { setCookie } from "cookies-next";
+
+export enum EnumTheme {
+  LIGHT = "light",
+  DARK = "dark",
+}
 
 interface ThemeContextProps {
   theme: string;
@@ -18,29 +25,32 @@ export const ThemeContext = createContext<ThemeContextProps>(defaultThemeValue);
 
 export default function ThemeContextProvider({
   children,
+  defaultTheme,
 }: {
   children: React.ReactNode;
+  defaultTheme: EnumTheme;
 }) {
-  const [theme, setTheme] = useState<string>(defaultThemeValue.theme);
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    setTheme(storedTheme || defaultThemeValue.theme);
-  }, []);
+  const [theme, setTheme] = useState<string>(defaultTheme || EnumTheme.DARK);
 
   const handleChangeTheme = (value: string) => {
     setTheme(value);
-    localStorage.setItem("theme", value);
+    setCookie("theme", value);
   };
 
   const selectedTheme = theme === "light" ? lightTheme : darkTheme;
+
   return (
     <ThemeContext.Provider
       value={{
-        theme: theme,
+        theme,
         changeTheme: (theme: string) => handleChangeTheme(theme),
-      }}>
-      <ThemeProvider theme={selectedTheme}>{children}</ThemeProvider>
+      }}
+    >
+      <ThemeProvider theme={selectedTheme}>
+        <CssBaseline />
+
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   );
 }

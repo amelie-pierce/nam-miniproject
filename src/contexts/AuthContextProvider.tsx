@@ -1,67 +1,51 @@
 "use client";
 
-import React, { createContext, useState, useEffect, useContext } from "react";
-import fakeUsers, { User } from "@/data/users";
+import React, { createContext, useState, useContext } from "react";
+import { User } from "@/data/users";
 import { useRouter } from "next/navigation";
+import { setCookie, deleteCookie } from "cookies-next";
 
 interface AuthContextProviderProps {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  isAuthenticated: boolean;
 }
 
 const AuthContextProvider = createContext<AuthContextProviderProps>({
   user: null,
   login: async () => {},
   logout: async () => {},
-  setUser: () => {},
-  isAuthenticated: false,
 });
 
 export const useAuth = () => useContext(AuthContextProvider);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export const AuthProvider: React.FC<{
+  children: React.ReactNode;
+  defaultUser: User;
+}> = ({ children, defaultUser }) => {
+  const [user, setUser] = useState<User | null>(defaultUser);
+
   const router = useRouter();
 
   const login = async (email: string, password: string) => {
-    const loggedInUser = fakeUsers.find(
-      (user) => user.email === email && user.password === password
-    );
+    const user = {
+      email,
+      password,
+    };
 
-    if (loggedInUser) {
-      setUser(loggedInUser);
-      localStorage.setItem("user", JSON.stringify(loggedInUser));
-      setIsAuthenticated(true);
-      router.push("/dashboard");
-    } else {
-      setUser(null);
-    }
+    setUser(user);
+    setCookie("user", user);
+    router.push("/dashboard");
   };
 
   const logout = async () => {
     setUser(null);
-    localStorage.removeItem("user");
-    setIsAuthenticated(false);
+    deleteCookie("user");
     router.push("/login");
   };
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      setUser(JSON.parse(loggedInUser));
-      setIsAuthenticated(true);
-    }
-  }, []);
-
   return (
-    <AuthContextProvider.Provider
-      value={{ user, login, logout, setUser, isAuthenticated }}>
+    <AuthContextProvider.Provider value={{ user, login, logout }}>
       {children}
     </AuthContextProvider.Provider>
   );

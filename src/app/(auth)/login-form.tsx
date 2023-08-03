@@ -2,12 +2,12 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import Button from "@mui/material/Button";
 import InputField from "../../components/InputField";
 import PasswordField from "../../components/PasswordField";
 import Container from "@mui/material/Container";
-import { Box, CssBaseline } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 export interface FormData {
   identifier: string;
@@ -23,42 +23,33 @@ interface LoginFormProps {
 export default function LoginForm({ onSubmit }: LoginFormProps) {
   const form = useForm<FormData>({
     defaultValues: {
-      identifier: "",
-      password: "",
+      identifier: "admin@gmail.com",
+      password: "admin123",
     },
   });
 
-  const handleSubmit: SubmitFunction = async (values) => {
-    if (onSubmit) {
-      await onSubmit(values);
-    }
-  };
-
-  const { isSubmitting } = form.formState;
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = form;
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
 
-        <Typography component="h1" variant="h5">
-          Sign In
-        </Typography>
+        <Typography variant="h5">Sign In</Typography>
 
-        <Box
-          component="form"
-          onSubmit={form.handleSubmit(handleSubmit)}
-          noValidate
-          sx={{ mt: 1 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <InputField name="identifier" label="Email" form={form} />
           <PasswordField name="password" label="Password" form={form} />
 
@@ -69,10 +60,11 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
             color="primary"
             fullWidth
             size="large"
-            sx={{ mt: 3, mb: 2 }}>
+            sx={{ mt: 3, mb: 2 }}
+          >
             Sign in
           </Button>
-        </Box>
+        </form>
       </Box>
     </Container>
   );

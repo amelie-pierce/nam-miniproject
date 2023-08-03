@@ -7,13 +7,10 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
 export default function ThemeButton() {
-  const [theme, setTheme] = useState<string>("dark");
-
-  const themeContextValue = useContext(ThemeContext);
+  const { changeTheme, theme } = useContext(ThemeContext);
 
   const handleThemeChange = () => {
-    setTheme((theme) => (theme === "light" ? "dark" : "light"));
-    themeContextValue.changeTheme(theme);
+    changeTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
@@ -22,15 +19,10 @@ export default function ThemeButton() {
         variant="contained"
         color="primary"
         sx={{ width: "100px", height: "40px" }}
-        startIcon={
-          themeContextValue.theme === "light" ? (
-            <DarkModeIcon />
-          ) : (
-            <LightModeIcon />
-          )
-        }
-        onClick={handleThemeChange}>
-        {themeContextValue.theme === "light" ? "Dark" : "Light"}
+        startIcon={theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+        onClick={handleThemeChange}
+      >
+        {theme === "light" ? "Dark" : "Light"}
       </Button>
     </Box>
   );

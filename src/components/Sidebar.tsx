@@ -10,7 +10,7 @@ import { mainListItems } from "./listItems";
 import { Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "@/contexts/AuthContextProvider";
-import { useRouter } from "next/navigation";
+import { useAppContext } from "@/contexts/AppContextProvider";
 
 const drawerWidth = 240;
 
@@ -40,20 +40,13 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-function Sidebar({
-  open,
-  toggleDrawer,
-}: {
-  open: boolean;
-  toggleDrawer: () => void;
-}) {
-  const { logout } = useAuth();
+function Sidebar() {
+  const { open, toggleDrawer } = useAppContext();
 
-  const router = useRouter();
+  const { logout } = useAuth();
 
   const handleLogout = () => {
     logout();
-    router.push("/");
   };
 
   return (
@@ -64,7 +57,8 @@ function Sidebar({
           alignItems: "center",
           justifyContent: "flex-end",
           px: [1],
-        }}>
+        }}
+      >
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
