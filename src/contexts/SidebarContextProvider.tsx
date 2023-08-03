@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 interface SidebarContextProps {
   sidebarOpen: boolean;

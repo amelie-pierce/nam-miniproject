@@ -1,10 +1,10 @@
 "use client";
 
-import { useContext, useState } from "react";
 import { ThemeContext } from "@/contexts/ThemeContextProvider";
-import { Box, Button } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import { Box, Button } from "@mui/material";
+import { useContext, useState } from "react";
 
 export default function ThemeButton() {
   const [theme, setTheme] = useState<string>("dark");

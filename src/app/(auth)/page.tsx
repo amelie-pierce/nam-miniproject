@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContextProvider";
-import LoginForm, { FormData } from "./login-form";
 import { loginUser } from "@/data/users";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import LoginForm, { FormData } from "./login-form";
 
 interface LoginProps {
   onSubmit: (values: FormData) => Promise<void>;

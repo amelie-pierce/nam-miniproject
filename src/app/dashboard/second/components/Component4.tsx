@@ -1,7 +1,7 @@
-import { Box, TextField } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import Component5 from "./Component5";
 import { useInputContext } from "@/contexts/InputContextProvider";
+import { Box, TextField } from "@mui/material";
+import React from "react";
+import Component5 from "./Component5";
 
 export default function Component4() {
   const { inputValue, setInputValue } = useInputContext();

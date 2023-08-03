@@ -1,9 +1,8 @@
 "use client";
 
-import { Box, Button } from "@mui/material";
-import React from "react";
-import Component3 from "./Component3";
 import { useSidebarContext } from "@/contexts/SidebarContextProvider";
+import { Box, Button } from "@mui/material";
+import Component3 from "./Component3";
 
 export default function Component2() {
   const { toggleSidebar } = useSidebarContext();

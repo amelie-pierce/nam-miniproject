@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
-import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "@/utils/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import { createContext, useEffect, useState } from "react";
 
 interface ThemeContextProps {
   theme: string;

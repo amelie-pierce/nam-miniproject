@@ -32,8 +32,6 @@ export const InputContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setInputValue(value);
   };
 
-  console.log("inputValue", inputValue);
-
   return (
     <InputContext.Provider
       value={{

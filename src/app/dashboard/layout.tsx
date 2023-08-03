@@ -2,9 +2,9 @@
 
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import { InputContextProvider } from "@/contexts/InputContextProvider";
 import SidebarContextProvider from "@/contexts/SidebarContextProvider";
 import { CssBaseline } from "@mui/material";
-import { InputContextProvider } from "@/contexts/InputContextProvider";
 
 const styles = {
   container: {

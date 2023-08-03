@@ -1,10 +1,10 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import Component1 from "./components/Component1";
-import Component7 from "./components/Component7";
 import Component10 from "./components/Component10";
+import Component7 from "./components/Component7";
 
 export default function Second() {
   const [displayText, setDisplayText] = useState("");

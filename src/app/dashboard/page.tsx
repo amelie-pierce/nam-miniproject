@@ -1,8 +1,7 @@
 "use client";
 
-import { Box } from "@mui/material";
-import React from "react";
 import { useAuth } from "@/contexts/AuthContextProvider";
+import { Box } from "@mui/material";
 
 export default function Dashboard() {
   const { user } = useAuth();

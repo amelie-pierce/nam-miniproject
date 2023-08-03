@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import React from "react";
 import Component9 from "./Component9";
 
 export default function Component8() {

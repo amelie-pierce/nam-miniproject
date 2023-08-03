@@ -1,13 +1,12 @@
-import React from "react";
-import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Box, CssBaseline } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "../../components/InputField";
 import PasswordField from "../../components/PasswordField";
-import Container from "@mui/material/Container";
-import { Box, CssBaseline } from "@mui/material";
 
 export interface FormData {
   identifier: string;

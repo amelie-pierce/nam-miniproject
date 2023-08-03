@@ -1,17 +1,16 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import MuiDrawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import { mainListItems } from "./listItems";
-import { Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "@/contexts/AuthContextProvider";
-import { useRouter } from "next/navigation";
 import { useSidebarContext } from "@/contexts/SidebarContextProvider";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import MuiDrawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import Toolbar from "@mui/material/Toolbar";
+import { styled } from "@mui/material/styles";
+import { useRouter } from "next/navigation";
+import { mainListItems } from "./listItems";
 
 const drawerWidth = 240;
 
