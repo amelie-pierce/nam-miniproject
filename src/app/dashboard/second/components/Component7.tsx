@@ -8,7 +8,14 @@ const Component7 = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {"Component 7"}
-      <Button onClick={submit}>Submit</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ width: "20rem" }}
+        onClick={submit}
+      >
+        Submit
+      </Button>
       <Component8 />
     </div>
   );

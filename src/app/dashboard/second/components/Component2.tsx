@@ -9,7 +9,15 @@ const Component2 = () => {
     <div
       style={{ display: "flex", flexDirection: "column", paddingLeft: "1rem" }}
     >
-      Component 2<Button onClick={toggleDrawer}>Toogle Side bar</Button>
+      Component 2
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ width: "20rem" }}
+        onClick={toggleDrawer}
+      >
+        Toogle Side bar
+      </Button>
       <Component3 />
     </div>
   );

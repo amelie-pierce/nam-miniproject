@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import React, { useState } from "react";
+
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Control, Controller } from "react-hook-form";
-import { FormHelperText, Typography } from "@mui/material";
+import { FormHelperText, TextField, Typography } from "@mui/material";
 
 interface PasswordFieldProps {
   form: {
@@ -31,30 +29,31 @@ export default function PasswordField(props: PasswordFieldProps) {
   const error = form.formState.errors[name]?.message;
 
   return (
-    <FormControl fullWidth margin="normal" variant="outlined">
-      <InputLabel htmlFor={name}>{label}</InputLabel>
+    <div>
       <Controller
         name={name}
         control={form.control}
         rules={{ required: "Please enter your password" }}
         render={({ field }) => {
           return (
-            <OutlinedInput
+            <TextField
               {...field}
               id={name}
               type={showPassword ? "text" : "password"}
               label={label}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={toggleShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={toggleShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               disabled={disabled}
               error={!!error}
             />
@@ -68,6 +67,6 @@ export default function PasswordField(props: PasswordFieldProps) {
           </Typography>
         </FormHelperText>
       )}
-    </FormControl>
+    </div>
   );
 }
