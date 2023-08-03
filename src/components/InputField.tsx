@@ -22,6 +22,10 @@ export default function InputField(props: InputFieldProps) {
       return "This field is required.";
     }
 
+    if (value.trim().length < 5) {
+      return "This field must be least 5 characters";
+    }
+
     // Validate email format using regular expression
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (!emailPattern.test(value)) {

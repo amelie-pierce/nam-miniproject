@@ -39,9 +39,9 @@ export const AuthProvider: React.FC<{
   };
 
   const logout = async () => {
-    setUser(null);
     deleteCookie("user");
-    router.push("/login");
+    setTimeout(() => setUser(null), 500);
+    router.push("/");
   };
 
   return (

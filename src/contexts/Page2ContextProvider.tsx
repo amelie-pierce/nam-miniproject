@@ -1,15 +1,21 @@
 "use client";
 
-import React, { createContext, useState, useContext, useRef } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useRef,
+  ReactNode,
+} from "react";
 
 interface Page2ContextProviderProps {
-  value: string;
+  value: ReactNode;
   setValue: (value: string) => void;
   submit: () => void;
 }
 
 const Page2Context = createContext<Page2ContextProviderProps>({
-  value: "",
+  value: null,
   setValue: () => {},
   submit: () => {},
 });
@@ -21,7 +27,7 @@ export const Page2ContextProvider: React.FC<{
 }> = ({ children }) => {
   const refValue = useRef("");
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<ReactNode>();
 
   const handleSetValue = (newValue: string) => {
     refValue.current = newValue;
@@ -29,10 +35,10 @@ export const Page2ContextProvider: React.FC<{
 
   const submit = () => {
     if (refValue.current) {
-      return setValue(refValue.current);
+      return setValue(<span>{refValue.current}</span>);
     }
 
-    return setValue("Value is empty");
+    return setValue(<span style={{ color: "red" }}>Value is empty</span>);
   };
 
   return (
